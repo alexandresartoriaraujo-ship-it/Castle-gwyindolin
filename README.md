@@ -144,4 +144,4 @@ O combate foi mantido simples. Ao escolher a opção 8, o jogador ataca o primei
 
 ## Autor
 
-[seu nome] – [disciplina] – [professor(a)]
+[Alexandre Sartori de araújo] – [Materia:Back-end] – [Professora:Fiama]
