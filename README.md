@@ -1,147 +1,296 @@
 # Castle Gwyindolin
 
-Jogo de horror psicológico em modo texto (console), feito em **Java** para a disciplina de Programação Orientada a Objetos. Inspirado em jogos de RPG Maker como *Ao Oni*, *Mogeko Castle* e *Yume Nikki*.
+**Castle Gwyindolin** é um jogo de terror psicológico em modo texto, desenvolvido em Java para a disciplina de Programação Orientada a Objetos (POO).
+
+O jogo é inspirado em RPGs de terror, especialmente títulos como *Ao Oni*, *Mogeko Castle* e *Yume Nikki*. Em vez de gráficos e animações, a experiência acontece pelo console, com exploração de ambientes, encontros com inimigos, coleta de itens e decisões que podem influenciar o final da história.
 
 ## Sobre o jogo
 
-O jogador acorda dentro de um casarão abandonado sem lembrar como chegou lá. Para escapar, ele precisa explorar as salas, pegar itens, abrir portas trancadas e sobreviver às criaturas que vivem na casa.
+O jogador acorda em um casarão misterioso sem saber exatamente como chegou ali. Para escapar, precisa explorar os cômodos, encontrar chaves e lidar com as criaturas que habitam o lugar.
 
-Além da **vida**, o jogador tem uma **sanidade** que cai com o tempo e com os ataques de certos inimigos. Os inimigos são perigosos, mas podem ser enfrentados: cada classe de personagem tem um valor de ataque diferente, e lutar também custa turnos. O final que o jogador consegue depende da sanidade com que ele chega à saída.
+Mas não basta apenas encontrar a saída. A sanidade também precisa ser preservada durante a exploração, já que permanecer naquele ambiente pode ser tão perigoso quanto enfrentar os inimigos.
 
 ## Objetivo
 
-Chegar ao **Portão** do casarão. Para isso é preciso pegar a *chave do porão*, entrar no Porão, pegar a *chave final* e usá-la para abrir o Portão.
+O principal objetivo é encontrar a chave do portão e escapar do casarão.
 
-## Como executar
+Para isso, o jogador precisa:
 
-Requisitos: Java instalado (JDK).
+- Explorar os cômodos disponíveis.
+- Encontrar a chave do porão na cozinha.
+- Entrar no porão e conseguir a chave final.
+- Chegar ao portão e tentar escapar com vida e sanidade suficientes.
 
-1. Coloque todos os arquivos `.java` na mesma pasta.
-2. Compile:
-
-```
-javac -encoding UTF-8 *.java
-```
-
-3. Execute:
-
-```
-java Main
-```
-
-Se você usa o IntelliJ, basta abrir o projeto e rodar a classe `Main`.
+As escolhas durante a partida influenciam as condições em que o jogador termina a história.
 
 ## Como jogar
 
-No começo, digite seu nome e escolha uma classe:
+O jogo funciona por meio de um menu apresentado no console. Cada opção permite realizar uma ação diferente.
 
-| Classe     | Vida | Sanidade | Ataque |
-|------------|------|----------|--------|
-| Estudante  | 85   | 85       | 15     |
-| Padre      | 70   | 100      | 10     |
-| Detetive   | 100  | 70       | 20     |
+| Opção | Ação |
+|---|---|
+| 1 | Movimentar-se entre os cômodos |
+| 2 | Pegar um item |
+| 3 | Usar um item do inventário |
+| 4 | Examinar um item |
+| 5 | Consultar o inventário |
+| 6 | Ver o status do personagem |
+| 7 | Observar o cômodo atual |
+| 8 | Atacar um inimigo |
+| 0 | Encerrar o jogo |
 
-Depois, use o menu:
+Algumas ações fazem o tempo passar. Quando isso acontece, os inimigos presentes no cômodo podem agir e a sanidade do jogador diminui. Por isso, é importante pensar antes de agir e administrar os recursos disponíveis.
 
-| Opção | Ação                                   | Gasta turno? |
-|-------|----------------------------------------|--------------|
-| 1     | Ir para outra sala                     | Sim          |
-| 2     | Pegar um item da sala                  | Sim          |
-| 3     | Usar um item do inventário             | Sim          |
-| 4     | Examinar um item do inventário         | Não          |
-| 5     | Ver inventário                         | Não          |
-| 6     | Ver status                             | Não          |
-| 7     | Olhar a sala                           | Não          |
-| 8     | Atacar um inimigo da sala              | Sim          |
-| 0     | Sair                                   | Não          |
+## Mapa do casarão
 
-Os nomes dos itens e as direções (`norte`, `sul`, `leste`, `oeste`) são digitados em letras minúsculas e sem acento. Exemplo: `chave do porao`.
+O mapa é formado por cinco cômodos conectados entre si:
 
-## Regras
+- **Quarto:** local onde a exploração começa. É possível encontrar uma bandagem.
+- **Corredor:** conecta os principais ambientes do casarão.
+- **Cozinha:** contém a chave do porão, um amuleto e uma Sombra.
+- **Porão:** área bloqueada inicialmente, onde estão a chave final e um Oni.
+- **Portão:** saída do casarão, que só pode ser aberta com a chave final.
 
-- O jogo é por turnos. A cada turno gasto, os inimigos da sala atacam o jogador e a sanidade cai 2 pontos.
-- A **Sombra** (Cozinha) tira 10 de sanidade por turno. Ela tem 20 de vida.
-- O **Oni** (Porão) tira 20 de vida por turno. Ele tem 30 de vida.
-- Um inimigo derrotado some da sala e deixa de atacar.
-- A *bandagem* devolve 30 de vida. O *amuleto* devolve 25 de sanidade. Vida e sanidade nunca passam de 100.
-- O Porão e o Portão ficam trancados e só abrem com a chave certa no inventário.
-- Vida ou sanidade em 0 significa **Game Over**.
+A progressão depende da exploração e da obtenção das chaves necessárias para acessar as áreas bloqueadas.
+
+## Classes de personagem
+
+No início da partida, o jogador escolhe uma das três classes disponíveis. Cada uma possui atributos próprios, oferecendo diferentes condições para enfrentar os desafios.
+
+| Classe | Vida inicial | Sanidade inicial | Ataque |
+|---|---:|---:|---:|
+| Estudante | 85 | 85 | 15 |
+| Padre | 70 | 100 | 10 |
+| Detetive | 100 | 70 | 20 |
+
+A escolha influencia a maneira como o jogador pode lidar com os inimigos e com os perigos do casarão.
+
+## Itens e inimigos
+
+### Itens
+
+- **Bandagem:** recupera 30 pontos de vida.
+- **Amuleto:** recupera 25 pontos de sanidade.
+- **Chaves:** permitem acessar áreas bloqueadas e avançar na exploração.
+
+Os itens podem ser encontrados nos cômodos e armazenados no inventário. Alguns podem ser usados diretamente pelo jogador, enquanto outros servem para liberar caminhos.
+
+### Inimigos
+
+- **Oni:** possui 30 pontos de vida e causa 20 pontos de dano ao jogador quando age.
+- **Sombra:** possui 20 pontos de vida e reduz a sanidade do jogador em 10 pontos quando age.
+
+Além dos efeitos dos inimigos, a passagem de um turno também reduz a sanidade em 2 pontos. Se a vida ou a sanidade chegar a zero, a partida termina.
 
 ## Finais
 
-Ao chegar no Portão, o final depende da sanidade:
+O final depende da sanidade restante quando o jogador consegue chegar ao portão e concluir a fuga.
 
-| Sanidade   | Final                                   |
-|------------|-----------------------------------------|
-| 50 ou mais | **Final bom** – A Luz da Manhã          |
-| 25 a 49    | **Final normal** – Cicatrizes           |
-| Abaixo de 25 | **Final ruim** – O Castelo Não Te Larga |
+- **Final bom:** sanidade igual ou superior a 50.
+- **Final normal:** sanidade entre 25 e 49.
+- **Final ruim:** sanidade inferior a 25.
 
-## Mapa
-
-```
-            [Portão]
-                |
-[Cozinha] - [Corredor] - [Porão]
-                |
-            [Quarto]
-```
-
-O jogador começa no Quarto. O Corredor liga todos os outros locais.
+Dessa forma, sobreviver aos confrontos não é suficiente: administrar a sanidade também faz parte do objetivo.
 
 ## Estrutura do projeto
 
-São 17 arquivos, cada um com uma classe, interface ou enum.
+O projeto foi organizado em classes com responsabilidades diferentes, evitando concentrar toda a lógica do jogo em um único arquivo.
 
-**Personagens**
-- `Personagem` (abstrata): nome, vida, receber dano e curar.
-- `Jogador`: sanidade, ataque, classe escolhida e inventário.
-- `Inimigo` (abstrata): obriga todo inimigo a ter o método `agir`.
-- `Oni` e `Sombra`: inimigos com ataques diferentes.
-- `ClasseJogador` (enum): Estudante, Padre e Detetive, com vida, sanidade e ataque iniciais.
+| Classe ou interface | Responsabilidade |
+|---|---|
+| `Main` | Ponto de entrada do programa. |
+| `Jogo` | Controla o andamento da partida, o menu, as ações e as condições de encerramento. |
+| `Mapa` | Cria os cômodos, suas conexões, os itens e os inimigos. |
+| `Sala` | Representa cada cômodo e mantém suas conexões, itens, inimigos e bloqueios. |
+| `Personagem` | Classe abstrata com os atributos e comportamentos básicos de um personagem. |
+| `Jogador` | Representa o personagem controlado pelo usuário, incluindo vida, sanidade, ataque, classe e inventário. |
+| `ClasseJogador` | Enumeração que define as classes disponíveis e seus atributos iniciais. |
+| `Inimigo` | Classe abstrata que estabelece o comportamento básico dos inimigos. |
+| `Oni` | Implementa o comportamento de ataque do Oni. |
+| `Sombra` | Implementa o comportamento da Sombra, que afeta a sanidade. |
+| `Inventario` | Armazena os itens do jogador e permite adicionar, remover, procurar e listar objetos. |
+| `Item` | Classe abstrata que representa os itens e fornece informações para sua descrição. |
+| `Chave` | Representa os itens utilizados para liberar áreas bloqueadas. |
+| `Remedio` | Implementa um item utilizável que recupera vida. |
+| `Amuleto` | Implementa um item utilizável que recupera sanidade. |
+| `Interagivel` | Interface que define o método de exame de um objeto. |
+| `Usavel` | Interface que define o comportamento de uso de um item. |
 
-**Itens**
-- `Item` (abstrata): nome e descrição.
-- `Chave`, `Remedio` e `Amuleto`: tipos de item.
-- `Inventario`: guarda os itens do jogador.
-- `Interagivel` (interface): o que pode ser examinado.
-- `Usavel` (interface): o que pode ser usado pelo jogador.
+## Conceitos de Programação Orientada a Objetos
 
-**Estrutura do jogo**
-- `Sala`: itens, inimigos, saídas e tranca.
-- `Mapa`: cria as salas e liga uma na outra.
-- `Jogo`: menu, turnos, combate e finais.
-- `Main`: inicia o jogo.
+O desenvolvimento de Castle Gwyindolin utiliza os principais conceitos estudados na disciplina de POO.
 
-## Conceitos de OO utilizados
+- **Encapsulamento:** os atributos das classes são privados e o acesso a eles é controlado por métodos, como getters e métodos responsáveis por alterar a vida ou a sanidade.
+- **Abstração:** as classes abstratas `Personagem`, `Inimigo` e `Item` representam conceitos gerais do jogo, deixando os comportamentos específicos para suas subclasses.
+- **Herança:** `Jogador` e `Inimigo` herdam de `Personagem`. Já `Oni` e `Sombra` herdam de `Inimigo`, enquanto `Chave`, `Remedio` e `Amuleto` herdam de `Item`.
+- **Polimorfismo:** os inimigos possuem implementações próprias do método `agir()`, e os itens utilizáveis implementam seu comportamento por meio de `usar()`.
+- **Interfaces:** `Interagivel` define o comportamento de examinar um objeto, enquanto `Usavel` define como um item pode ser utilizado.
+- **Composição:** o jogador possui um inventário, e o jogo mantém um mapa para organizar a partida.
+- **Agregação e associações:** as salas mantêm referências aos itens e inimigos presentes nelas, enquanto o mapa conecta as salas e o jogo utiliza esses objetos durante a exploração.
 
-| Conceito | Onde aparece |
-|----------|--------------|
-| **Classes e objetos** | Cada elemento do jogo é uma classe: `Jogador`, `Oni`, `Sala`, `Item` etc. |
-| **Atributos e métodos** | Ex.: `Jogador` tem `sanidade` e os métodos `perderSanidade()` e `recuperarSanidade()`. |
-| **Encapsulamento** | Atributos `private`, com métodos que controlam as mudanças (a vida nunca fica negativa nem passa de 100). |
-| **Construtores** | `Jogador(nome, classe)` chama `super()` de `Personagem`. `Mapa()` monta o casarão inteiro. |
-| **Herança** | `Jogador` e `Inimigo` herdam de `Personagem`. `Oni` e `Sombra` herdam de `Inimigo`. `Chave`, `Remedio` e `Amuleto` herdam de `Item`. |
-| **Abstração** | `Personagem`, `Inimigo` e `Item` são abstratas: não existe um "inimigo genérico" no jogo. |
-| **Polimorfismo** | No `passarTurno()`, o `Jogo` chama `inimigo.agir(jogador)` sem saber se é `Oni` ou `Sombra`. Cada um age de um jeito. |
-| **Interfaces** | `Usavel` só é assinada por `Remedio` e `Amuleto` (a `Chave` não pode ser usada). `Interagivel` define o que pode ser examinado. |
-| **Composição** | `Jogador` possui um `Inventario`. `Mapa` possui as `Sala`s. `Jogo` possui o `Mapa`. |
-| **Agregação** | `Inventario` e `Sala` guardam `Item`s, e `Sala` guarda `Inimigo`s. Esses objetos existem independentemente de onde estão. |
-| **Enum** | `ClasseJogador` define um conjunto fixo de classes e os valores iniciais de cada uma. |
+Essas escolhas ajudam a separar as responsabilidades, facilitam a organização do código e permitem adicionar novos elementos ao jogo sem precisar reescrever toda a estrutura.
 
-## Combate
+## Diagrama de classes
 
-O combate foi mantido simples. Ao escolher a opção 8, o jogador ataca o primeiro inimigo da sala e causa o dano da sua classe usando `receberDano()`, que já existe em `Personagem`. Se a vida do inimigo chegar a 0, ele é removido da sala pelo método `removerInimigo()`. Depois do ataque, os inimigos que sobraram agem normalmente.
+O diagrama abaixo apresenta as principais classes do projeto e como elas se relacionam.
 
-## Possíveis melhorias
+```mermaid
+classDiagram
+    direction TB
 
-- Trocar o atributo `estado` (número) por um enum `EstadoJogo`.
-- Criar NPCs com diálogos e missões.
-- Criar um chefe (`Boss`) como nova subclasse de `Inimigo`.
-- Criar uma classe `Batalha` para separar o combate do `Jogo`.
-- Permitir escolher qual inimigo atacar quando houver mais de um na sala.
-- Adicionar mais salas, itens e puzzles.
+    class Main {
+        +main()
+    }
+
+    class Jogo {
+        -Jogador jogador
+        -Mapa mapa
+        -Sala salaAtual
+        -int estado
+        +iniciar()
+    }
+
+    class Mapa {
+        -Sala salaInicial
+        -Sala portao
+        +getSalaInicial() Sala
+        +getPortao() Sala
+    }
+
+    class Sala {
+        -String nome
+        -String descricao
+        -String chaveNecessaria
+        -ArrayList itens
+        -ArrayList inimigos
+        -Sala norte
+        -Sala sul
+        -Sala leste
+        -Sala oeste
+    }
+
+    class Personagem {
+        <<abstract>>
+        -String nome
+        -int vida
+        +getNome() String
+        +getVida() int
+        +receberDano(int dano) void
+        +curar(int quantidade) void
+    }
+
+    class Jogador {
+        -int sanidade
+        -int ataque
+        -ClasseJogador classe
+        -Inventario inventario
+        +perderSanidade(int quantidade) void
+        +recuperarSanidade(int quantidade) void
+    }
+
+    class ClasseJogador {
+        <<enumeration>>
+        ESTUDANTE
+        PADRE
+        DETETIVE
+    }
+
+    class Inimigo {
+        <<abstract>>
+        +agir(Jogador jogador)*
+    }
+
+    class Oni {
+        +agir(Jogador jogador) void
+    }
+
+    class Sombra {
+        +agir(Jogador jogador) void
+    }
+
+    class Inventario {
+        -ArrayList itens
+        +adicionar(Item item) void
+        +remover(Item item) void
+        +buscar(String nome) Item
+        +listar() void
+    }
+
+    class Item {
+        <<abstract>>
+        -String nome
+        -String descricao
+        +getNome() String
+        +examinar() String
+    }
+
+    class Chave
+
+    class Remedio {
+        -int cura
+        +usar(Jogador jogador) void
+    }
+
+    class Amuleto {
+        -int forca
+        +usar(Jogador jogador) void
+    }
+
+    class Interagivel {
+        <<interface>>
+        +examinar() String
+    }
+
+    class Usavel {
+        <<interface>>
+        +usar(Jogador jogador) void
+    }
+
+    Main ..> Jogo
+    Jogo *-- Mapa
+    Jogo --> Jogador
+    Jogo --> Sala
+    Mapa *-- Sala
+
+    Personagem <|-- Jogador
+    Personagem <|-- Inimigo
+    Inimigo <|-- Oni
+    Inimigo <|-- Sombra
+
+    Jogador *-- Inventario
+    Jogador --> ClasseJogador
+    Inventario o-- Item
+    Sala o-- Item
+    Sala o-- Inimigo
+
+    Item ..|> Interagivel
+    Item <|-- Chave
+    Item <|-- Remedio
+    Item <|-- Amuleto
+    Remedio ..|> Usavel
+    Amuleto ..|> Usavel
+
+    Inimigo ..> Jogador
+```
+
+## Tecnologias utilizadas
+
+- **Java:** linguagem utilizada no desenvolvimento da lógica do jogo.
+- **Programação Orientada a Objetos:** organização do projeto por meio de classes, objetos, herança, encapsulamento, abstração e polimorfismo.
+- **Console:** interface utilizada para apresentar as informações e receber os comandos do jogador.
+- **Mermaid:** ferramenta utilizada para representar visualmente a estrutura das classes.
+
+## Considerações finais
+
+Castle Gwyindolin foi desenvolvido como um projeto acadêmico para colocar em prática os conceitos de Programação Orientada a Objetos. A proposta combina exploração, gerenciamento de recursos e elementos de terror psicológico em um jogo executado pelo console.
+
+Além da experiência de jogo, o projeto permite demonstrar como diferentes classes podem trabalhar em conjunto, cada uma com sua própria responsabilidade, formando uma aplicação organizada e funcional.
 
 ## Autor
 
-[Alexandre Sartori de araújo] – [Materia:Back-end] – [Professora:Fiama]
+Alexandre Sartori De Araújo
+
+professora: Fiama
+
+Matéria: Back-end e POO
+
