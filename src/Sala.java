@@ -78,6 +78,10 @@ public class Sala {
         inimigos.add(inimigo);
     }
 
+    public void removerInimigo(Inimigo inimigo) {
+        inimigos.remove(inimigo);
+    }
+
     public ArrayList<Inimigo> getInimigos() {
         return inimigos;
     }
@@ -90,7 +94,7 @@ public class Sala {
             System.out.println("Você vê: " + i.getNome());
         }
         for (Inimigo e : inimigos) {
-            System.out.println("Cuidado! " + e.getNome() + " está aqui.");
+            System.out.println("Cuidado! " + e.getNome() + " está aqui (vida " + e.getVida() + ").");
         }
         if (norte != null) {
             System.out.println("Saída ao norte");

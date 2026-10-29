@@ -1,7 +1,7 @@
 public class Oni extends Inimigo {
 
     public Oni() {
-        super("Oni", 999);
+        super("Oni", 30);
     }
 
     @Override

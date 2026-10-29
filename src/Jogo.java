@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jogo {
@@ -20,9 +21,9 @@ public class Jogo {
         String nome = sc.nextLine();
 
         System.out.println("Escolha sua classe:");
-        System.out.println("1 - Estudante (vida 85, sanidade 85)");
-        System.out.println("2 - Padre (vida 70, sanidade 100)");
-        System.out.println("3 - Detetive (vida 100, sanidade 70)");
+        System.out.println("1 - Estudante (vida 85, sanidade 85, ataque 15)");
+        System.out.println("2 - Padre (vida 70, sanidade 100, ataque 10)");
+        System.out.println("3 - Detetive (vida 100, sanidade 70, ataque 20)");
         String escolha = sc.nextLine();
 
         ClasseJogador classe = ClasseJogador.ESTUDANTE;
@@ -61,9 +62,11 @@ public class Jogo {
                 jogador.getInventario().listar();
             } else if (opcao.equals("6")) {
                 System.out.println(jogador.getNome() + " (" + jogador.getClasse() + ")");
-                System.out.println("Vida: " + jogador.getVida() + " | Sanidade: " + jogador.getSanidade());
+                System.out.println("Vida: " + jogador.getVida() + " | Sanidade: " + jogador.getSanidade() + " | Ataque: " + jogador.getAtaque());
             } else if (opcao.equals("7")) {
                 salaAtual.mostrar();
+            } else if (opcao.equals("8")) {
+                atacar();
             } else if (opcao.equals("0")) {
                 estado = 3;
             } else {
@@ -74,11 +77,26 @@ public class Jogo {
         }
 
         if (estado == 1) {
-            System.out.println("Você escapou do casarão. FIM.");
+            System.out.println();
+            System.out.println("FINAL BOM - A Luz da Manhã");
+            System.out.println("Você atravessa o portão com a mente intacta.");
+            System.out.println("O sol nasce e o Castelo fica para trás, como um pesadelo distante.");
+        } else if (estado == 4) {
+            System.out.println();
+            System.out.println("FINAL NORMAL - Cicatrizes");
+            System.out.println("Você escapa, mas as sombras continuam te seguindo em sonho.");
+            System.out.println("Algumas noites, você ainda ouve alguém sussurrar o seu nome.");
+        } else if (estado == 5) {
+            System.out.println();
+            System.out.println("FINAL RUIM - O Casarão Não Te Larga");
+            System.out.println("Você cruza o portão, mas sua mente ficou lá dentro.");
+            System.out.println("Ao olhar para trás, vê a si mesmo na janela, sorrindo.");
         } else if (estado == 2) {
-            System.out.println("Você grita enquanto as sombras consomem seu corpo, e você sabe que nada...ira fazer voce sair daquele pesadelo... GAME OVER.");
+            System.out.println();
+            System.out.println("GAME OVER - Você não resistiu...");
         } else {
-            System.out.println("Você corta os pulsos.");
+            System.out.println();
+            System.out.println("Você desistiu, como um covarde.");
         }
     }
 
@@ -86,7 +104,7 @@ public class Jogo {
         System.out.println();
         System.out.println("----------------------------------------");
         System.out.println("Vida: " + jogador.getVida() + " | Sanidade: " + jogador.getSanidade());
-        System.out.println("1-Ir  2-Pegar  3-Usar  4-Examinar  5-Inventário  6-Status  7-Olhar  0-Sair");
+        System.out.println("1-Ir  2-Pegar  3-Usar  4-Examinar  5-Inventário  6-Status  7-Olhar  8-Atacar  0-Sair");
         System.out.print("O que você faz? ");
     }
 
@@ -126,9 +144,21 @@ public class Jogo {
         salaAtual = destino;
         salaAtual.mostrar();
         if (salaAtual == mapa.getPortao()) {
-            estado = 1;
+            escolherFinal();
         } else {
             passarTurno();
+        }
+    }
+
+    private void escolherFinal() {
+        int sanidade = jogador.getSanidade();
+
+        if (sanidade >= 50) {
+            estado = 1;
+        } else if (sanidade >= 25) {
+            estado = 4;
+        } else {
+            estado = 5;
         }
     }
 
@@ -166,6 +196,24 @@ public class Jogo {
         }
     }
 
+    private void atacar() {
+        ArrayList<Inimigo> inimigos = salaAtual.getInimigos();
+
+        if (inimigos.size() == 0) {
+            System.out.println("Não há ninguém para atacar aqui.");
+        } else {
+            Inimigo alvo = inimigos.get(0);
+            alvo.receberDano(jogador.getAtaque());
+            System.out.println("Você ataca " + alvo.getNome() + " e causa " + jogador.getAtaque() + " de dano.");
+
+            if (alvo.getVida() <= 0) {
+                System.out.println(alvo.getNome() + " foi derrotado!");
+                salaAtual.removerInimigo(alvo);
+            }
+            passarTurno();
+        }
+    }
+
     private void passarTurno() {
         for (Inimigo inimigo : salaAtual.getInimigos()) {
             inimigo.agir(jogador);
@@ -184,4 +232,3 @@ public class Jogo {
         }
     }
 }
-

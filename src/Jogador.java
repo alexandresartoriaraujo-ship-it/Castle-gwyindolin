@@ -1,5 +1,6 @@
 public class Jogador extends Personagem {
     private int sanidade;
+    private int ataque;
     private ClasseJogador classe;
     private Inventario inventario;
 
@@ -7,6 +8,7 @@ public class Jogador extends Personagem {
         super(nome, classe.getVidaInicial());
         this.classe = classe;
         sanidade = classe.getSanidadeInicial();
+        ataque = classe.getAtaque();
         inventario = new Inventario();
     }
 
@@ -16,6 +18,10 @@ public class Jogador extends Personagem {
 
     public int getSanidade() {
         return sanidade;
+    }
+
+    public int getAtaque() {
+        return ataque;
     }
 
     public Inventario getInventario() {

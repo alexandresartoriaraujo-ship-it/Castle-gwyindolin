@@ -1,7 +1,7 @@
 public class Sombra extends Inimigo {
 
     public Sombra() {
-        super("Sombra", 999);
+        super("Sombra", 20);
     }
 
     @Override
